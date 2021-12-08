@@ -1,28 +1,48 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <MenuBar />
+
+    <v-main>
+      <v-card>
+        <v-card-title>Registro de datos</v-card-title>
+        <v-card-text>
+          <v-row>
+            <v-col :class="'ma-3'">
+              <Formulario   @datosPersonal="cargarDatos($event)"/>
+            </v-col>
+            <v-col>
+              <Tabla
+                :personal="dpersonal"
+               
+              />
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Formulario from "./components/Formulario.vue";
+import MenuBar from "./components/MenuBar.vue";
+import Tabla from "./components/Tabla.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
-</script>
+    MenuBar,
+    Formulario,
+    Tabla,
+  },
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data() {
+    return { dpersonal: [] };
+  },
+  methods: {
+    cargarDatos(personal) {
+      this.dpersonal.push(personal);
+    },
+    
+  },
+};
+</script>
